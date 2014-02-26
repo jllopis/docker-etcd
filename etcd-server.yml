@@ -1,0 +1,24 @@
+# This is a previous stage to build the docker image.
+# It build etcd from source and put the binaries in the files subdir
+# of the image role (./ansible/roles/etcd-server/files)
+---
+- hosts: all
+  connection: local
+  vars:
+    src_build_dir: /tmp/etcd_build
+    etcd_git_repo: https://github.com/coreos/etcd
+    etcd_version: v0.3.0
+    etcd_build_dir: "{{ src_build_dir }}/etcd"
+    role_etcd_files_dir: roles/etcd-server/files
+    docker_image_tag: etcd:test
+
+  # build etcd from source
+  roles:
+    - etcd-server
+
+  tasks:
+    - name: build docker image for etcd-server
+      shell: docker build -t {{ docker_image_tag }} .
+
+# BUILD WITH
+# ansible-playbook etcd-server.yml -i hosts

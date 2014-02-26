@@ -1,0 +1,4 @@
+*~
+*.bak
+roles/etcd-server/files/etcd
+
