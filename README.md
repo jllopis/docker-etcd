@@ -1,4 +1,4 @@
 docker-etcd
 ===========
 
-docker etcd server image
+Build a etcd server docker image with busybox (under 20MB).
