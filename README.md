@@ -12,11 +12,23 @@ This tiny image starts **etcd** with the default configuration.
 
 # Build
 
+## Using ansible
+
+This will compile etcd from sources and will use it inside the container.
+
 Install [Ansible](http://docs.ansible.com/intro_installation.html) (recommended) and run
 
     ansible-playbook etcd-server.yml -i hosts -e "docker_image_tag=my_user/etcd:0.3.0"
 
-Check the resulting image with *docker*:
+## From compiled binaries
+
+Get the binary files:
+
+    $ curl -L -O https://github.com/coreos/etcd/releases/download/v0.3.0/etcd-v0.3.0-linux-amd64.tar.gz
+    $ tar zxvf etcd-v0.3.0-linux-amd64.tar.gz
+    $ docker build -t my_user/etcd:0.3.0
+
+# Check the resulting image with *docker*:
 
 ```bash
 docker images
@@ -27,7 +39,6 @@ base                latest              f28c2cabcb3e        30 hours ago        
 ubuntu              12.04               9cd978db300e        3 weeks ago         204.4 MB
 jpetazzo/busybox    latest              0c0468ea37af        8 months ago        3.229 MB
 ```
-
 # Start
 
 To start the container execute:
@@ -43,7 +54,7 @@ This is accessible to CMD so *etcd* will use it as their node name. If not speci
 
 It is also possible to map another ports on the host. Do it adding **-p local_port:container_port** to **docker run**:
 
-    docker run -d -p 4242:4001  -v local_fs:/opt/etcd-server/data jllopis/etcd:0.3.0
+    docker run -d -p 4242:4001 -v local_fs:/opt/etcd-server/data jllopis/etcd:0.3.0
 
 # Ports
 The ports used are:
