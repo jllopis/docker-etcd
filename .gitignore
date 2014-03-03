@@ -1,4 +1,7 @@
 *~
 *.bak
 roles/etcd-server/files/etcd
+etcd-v0.3.0-linux-amd64/README-etcd.md
+etcd-v0.3.0-linux-amd64/README-etcdctl.md
+etcd-v0.3.0-linux-amd64/etcdctl
 
