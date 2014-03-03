@@ -9,12 +9,12 @@
   shell: ./build chdir={{ etcd_build_dir }}
 
 - name: delete binaries if already there
-  file: dest={{ role_etcd_files_dir }}/{{ item }} state=absent
+  file: dest={{ etcd_bin_dir }}/{{ item }} state=absent
   with_items:
     - etcd
 
 - name: copy binaries to files directory
-  copy: src={{ etcd_build_dir }}/bin/{{ item }} dest={{ role_etcd_files_dir }}/{{ item }} mode=0755
+  copy: src={{ etcd_build_dir }}/bin/{{ item }} dest={{ etcd_bin_dir }}/{{ item }} mode=0755
   with_items:
     - etcd
 
