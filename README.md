@@ -24,9 +24,9 @@ Install [Ansible](http://docs.ansible.com/intro_installation.html) (recommended)
 
 Get the binary files:
 
-    $ curl -L -O https://github.com/coreos/etcd/releases/download/v0.3.0/etcd-v0.3.0-linux-amd64.tar.gz
-    $ tar zxvf etcd-v0.3.0-linux-amd64.tar.gz
-    $ docker build -t my_user/etcd:0.3.0
+    # curl -L -O https://github.com/coreos/etcd/releases/download/v0.3.0/etcd-v0.3.0-linux-amd64.tar.gz
+    # tar zxvf etcd-v0.3.0-linux-amd64.tar.gz
+    # docker build -t my_user/etcd:0.3.0
 
 # Check the resulting image with *docker*:
 
