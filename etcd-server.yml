@@ -11,6 +11,7 @@
     etcd_build_dir: "{{ src_build_dir }}/etcd"
     role_etcd_files_dir: roles/etcd-server/files
     docker_image_tag: etcd:test
+    etcd_bin_dir: etcd-v0.3.0-linux-amd64/
 
   # build etcd from source
   roles:
