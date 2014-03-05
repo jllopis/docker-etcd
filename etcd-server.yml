@@ -21,4 +21,4 @@
       shell: docker build -t {{ docker_image_tag }} .
 
 # BUILD WITH
-# ansible-playbook etcd-server.yml -i hosts
+# ansible-playbook etcd-server.yml -i hosts [-e "docker_image_tag=cooluser/etcd:1.0"]
