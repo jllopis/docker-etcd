@@ -7,16 +7,25 @@
 
 - name: build etcd exec
   shell: ./build chdir={{ etcd_build_dir }}
+  environment:
+          GOOS: linux
+          GOARCH: amd64
 
 - name: delete binaries if already there
   file: dest={{ etcd_bin_dir }}/{{ item }} state=absent
   with_items:
     - etcd
+    - etcdctl
+    - etcd-dump-logs
+    - etcd-migrate
 
 - name: copy binaries to files directory
   copy: src={{ etcd_build_dir }}/bin/{{ item }} dest={{ etcd_bin_dir }}/{{ item }} mode=0755
   with_items:
     - etcd
+    - etcdctl
+    - etcd-dump-logs
+    - etcd-migrate
 
 - name: clean temp files
   file: dest={{ src_build_dir }} state=absent

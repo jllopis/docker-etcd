@@ -2,9 +2,13 @@ FROM jpetazzo/busybox
 MAINTAINER Joan Llopis <jllopisg@gmail.com>
 
 ENV LC_ALL en_US.UTF-8
+ENV PATH /opt/etcd-server/bin:$PATH
 
 RUN mkdir -p /opt/etcd-server/bin ; mkdir -p /opt/etcd-server/data
-ADD etcd-v0.3.0-linux-amd64/etcd /opt/etcd-server/bin/etcd
+ADD etcd-v2.0.4-linux-amd64/etcd /opt/etcd-server/bin/etcd
+ADD etcd-v2.0.4-linux-amd64/etcdctl /opt/etcd-server/bin/etcdctl
+ADD etcd-v2.0.4-linux-amd64/etcd-migrate /opt/etcd-server/bin/etcd-migrate
+ADD etcd-v2.0.4-linux-amd64/etcd-dump-logs /opt/etcd-server/bin/etcd-dump-logs
 
 EXPOSE 4001
 EXPOSE 7001
