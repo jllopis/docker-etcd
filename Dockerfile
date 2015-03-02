@@ -6,6 +6,7 @@ ENV PATH /opt/etcd-server/bin:$PATH
 
 RUN mkdir -p /opt/etcd-server/bin ; mkdir -p /opt/etcd-server/data
 ADD etcd-v2.0.4-linux-amd64/etcd /opt/etcd-server/bin/etcd
+ADD run.sh /opt/etcd-server/bin/run.sh
 ADD etcd-v2.0.4-linux-amd64/etcdctl /opt/etcd-server/bin/etcdctl
 ADD etcd-v2.0.4-linux-amd64/etcd-migrate /opt/etcd-server/bin/etcd-migrate
 ADD etcd-v2.0.4-linux-amd64/etcd-dump-logs /opt/etcd-server/bin/etcd-dump-logs
@@ -15,7 +16,8 @@ EXPOSE 7001
 
 VOLUME /opt/etcd-server/data
 
-ENTRYPOINT ["/opt/etcd-server/bin/etcd"]
+#ENTRYPOINT ["/opt/etcd-server/bin/etcd"]
+ENTRYPOINT ["/opt/etcd-server/bin/run.sh"]
 
 # To run:
 # docker run -i -p 4001:4001 -p 7001:7001 -v /tmp/etcd_data:/opt/etcd-server/data -t etcd-server:test
