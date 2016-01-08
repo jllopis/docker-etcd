@@ -13,7 +13,9 @@ EXPOSE 7001
 VOLUME ["/data"]
 VOLUME ["/certs"]
 
-COPY tmp/etcd* /
+ENV ETCD_VERSION v2.2.3
+
+COPY etcd-${ETCD_VERSION}-linux-amd64/etcd* /
 COPY certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 WORKDIR /
 

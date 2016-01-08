@@ -1,5 +1,4 @@
 ETCD_VERSION=2.2.3
-TEMPDIR="tmp/"
 DOCKER=$(shell which docker)
 
 default:
@@ -11,7 +10,6 @@ download:
 	@echo "downloading last etcd binary"
 	@curl -L  https://github.com/coreos/etcd/releases/download/v$(ETCD_VERSION)/etcd-v$(ETCD_VERSION)-linux-amd64.tar.gz -o etcd-v$(ETCD_VERSION)-linux-amd64.tar.gz
 	@tar zxvf etcd-v$(ETCD_VERSION)-linux-amd64.tar.gz etcd-v$(ETCD_VERSION)-linux-amd64/etcd etcd-v$(ETCD_VERSION)-linux-amd64/etcdctl
-	@mv etcd-v$(ETCD_VERSION)-linux-amd64/ $(TEMPDIR)
 
 image: clean download
 	@echo "Building docker image"
@@ -19,7 +17,7 @@ image: clean download
 
 clean:
 	@echo "cleaning up this mess"
-	@rm -vfr $(TEMPDIR) || true
+	@rm -vfr etcd-v$(ETCD_VERSION)-linux-amd64 || true
 	@rm -v etcd-v$(ETCD_VERSION)-linux-amd64.tar.gz || true
 
 
