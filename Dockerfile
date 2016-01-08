@@ -1,23 +1,23 @@
-FROM jpetazzo/busybox
+# VERSION          v0.2.0
+# DOCKER-VERSION   v1.9.0
+# AUTHOR:          Joan Llopis <jllopisg@gmail.com>
+# DESCRIPTION:     etcd and etcdctl binaries
+FROM scratch
 MAINTAINER Joan Llopis <jllopisg@gmail.com>
 
-ENV LC_ALL en_US.UTF-8
-ENV PATH /opt/etcd-server/bin:$PATH
-
-RUN mkdir -p /opt/etcd-server/bin ; mkdir -p /opt/etcd-server/data
-ADD etcd-v2.0.4-linux-amd64/etcd /opt/etcd-server/bin/etcd
-ADD run.sh /opt/etcd-server/bin/run.sh
-ADD etcd-v2.0.4-linux-amd64/etcdctl /opt/etcd-server/bin/etcdctl
-ADD etcd-v2.0.4-linux-amd64/etcd-migrate /opt/etcd-server/bin/etcd-migrate
-ADD etcd-v2.0.4-linux-amd64/etcd-dump-logs /opt/etcd-server/bin/etcd-dump-logs
-
+EXPOSE 2380
+EXPOSE 2379
 EXPOSE 4001
 EXPOSE 7001
 
-VOLUME /opt/etcd-server/data
+VOLUME ["/data"]
+VOLUME ["/certs"]
 
-#ENTRYPOINT ["/opt/etcd-server/bin/etcd"]
-ENTRYPOINT ["/opt/etcd-server/bin/run.sh"]
+COPY tmp/etcd* /
+COPY certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+WORKDIR /
+
+ENTRYPOINT ["/etcd"]
 
 # To run:
 # docker run -i -p 4001:4001 -p 7001:7001 -v /tmp/etcd_data:/opt/etcd-server/data -t etcd-server:test
